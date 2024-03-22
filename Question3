@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "Enter customer ID: "
+read customer_id
+
+echo "Enter customer name: "
+read customer_name
+
+echo "Enter units consumed: "
+read units_consumed
+if [[ $units_consumed -le 199 ]]; then
+  charge_per_unit=120
+elif [[ $units_consumed -le 400 ]]; then
+  charge_per_unit=150
+elif [[ $units_consumed -le 600 ]]; then
+  charge_per_unit=180
+else
+  charge_per_unit=200
+fi
+
+total_bill=$(echo "$units_consumed * $charge_per_unit" | bc)
+echo "Customer ID: $customer_id"
+echo "Customer Name: $customer_name"
+echo "Units Consumed: $units_consumed"
+echo "Total Bill: Ksh $total_bill"
