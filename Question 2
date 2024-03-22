@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+int main() {
+  int fd; // file descriptor
+  char *mytext = "Hello World";
+  char buffer[1024];
+
+  // Open the file in read-write mode
+  fd = open("test.txt", O_RDWR | O_CREAT, 0666);
+  if (fd == -1) {
+     perror("open");
+     exit(1);
+  }
+
+  // Write "Hello World" to the file
+  write(fd, mytext, strlen(mytext));
+
+  // Read the content from the file
+  read(fd, buffer, 1024);
+
+  // Print the content
+  printf("The content of the file is %s\n", buffer);
+
+  // Close the file
+  close(fd);
+
+  return 0;
+}
