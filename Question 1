@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo "Enter employee name: "
+read employee_name
+
+echo "Enter hours worked: "
+read hours_worked
+
+echo "Enter rate per hour: "
+read rate_per_hour
+basic_pay=$(echo "$hours_worked * $rate_per_hour" | bc)
+if [[ $basic_pay -gt 70000 ]]; then
+  tax=$(echo "0.25 * $basic_pay" | bc)
+elif [[ $basic_pay -gt 15000 ]]; then
+  tax=$(echo "0.15 * $basic_pay" | bc)
+else
+  tax=0
+fi
+net_pay=$(echo "$basic_pay - $tax" | bc)
+echo "Employee name: $employee_name"
+echo "Basic pay: $basic_pay"
+echo "Tax: $tax"
+echo "Net pay: $net_pay"
